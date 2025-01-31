@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+| Corero de cambio de contraseña enviada!
+{% endblock %}
+
+{% block class_body %}hold-transition login-page
+{% endblock %}
+{% block class_main_div %}login-box
+{% endblock %}
+{% block body %}
+	<div class="login-logo">
+		<a href="{{path('app_login')}}">
+			{% if empresaGlobal=='fundempresa'%}
+					<img src="{{asset('img/logo_fundempresa.png')}}" alt="Relaciones Comerciales | FUNDEMPRESA" width="100%">
+				{% else %}
+					<img src="{{asset('img/3negocios_cnc.png')}}" alt="CNC"  class="brand-image2 img-circle2 elevatin-5" width="100%">
+				{% endif %}</a>
+	</div>
+	<div class="card">
+		<div class="card-body login-card-body">
+			<p class="login-box-msg">
+                Un correo fue enviado donde contiene un link para que pueada ingresar para restaurar su contraseña.
+				{# An email has been sent that contains a link that you can click to reset your password.
+				        This link will expire in #}
+                Este link expirará en 
+				{{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+			</p>
+			<p class="login-box-msg">
+                Si no recivió algun correo, por favor revise su carpeta de spam o 
+                {# If you don't receive an email please check your spam folder or #}
+				<a href="{{ path('app_forgot_password_request') }}">intente de nuevo.</a>.</p>
+			<p class="mt-3 mb-1">
+				<a href="{{path('app_login')}}">Ingresar</a>
+			</p>
+		</div>
+	</div>
+
+{% endblock %}

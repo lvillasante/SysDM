@@ -1,0 +1,724 @@
+{% extends 'layout.html.twig' %}
+{% block title_page %}DM | Reportes
+{% endblock %}
+
+{% block contenido %}
+	<div class="right_col" role="main">
+		<div class="">
+
+			<div class="row">
+				{% if is_granted('ROLE_ADMIN') %}
+				<div class="col-md-4">
+					<div class="tile-stats">
+						<div class="icon">
+							<i class="fa fa fa-gears"></i>
+						</div>
+						<div class="count">{{marcasLength}}</div>
+						<h3>Marcas</h3>
+						<p>Registradas en el sistema Dinámica Miasmática</p>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="tile-stats">
+						<div class="icon">
+							<i class="fa fa-table"></i>
+						</div>
+						<div class="count">{{sintomasLength}}</div>
+						<h3>Síntomas</h3>
+						<p>Registrados en el sistema Dinámica Miasmática</p>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="tile-stats">
+						<div class="icon">
+							<i class="fa fa-clone"></i>
+						</div>
+						<div class="count" id="nroReportesData">{{nroReportes}}</div>
+						<h3>Reportes
+						</h3>
+						<p>Generados en el sistema Dinámica Miasmática</p>
+					</div>
+				</div>
+				{% endif %}
+				{% if is_granted('ROLE_ESTUDIANTE') or is_granted('ROLE_MEDICO') %}
+				<div class="col-md-6">
+					<div class="tile-stats">
+						<div class="icon">
+							<i class="fa fa fa-gears"></i>
+						</div>
+						<div class="count">{{marcasLength}}</div>
+						<h3>Marcas</h3>
+						<p>Registradas en el sistema Dinámica Miasmática</p>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="tile-stats">
+						<div class="icon">
+							<i class="fa fa-table"></i>
+						</div>
+						<div class="count">{{sintomasLength}}</div>
+						<h3>Síntomas</h3>
+						<p>Registrados en el sistema Dinámica Miasmática</p>
+					</div>
+				</div>
+				{% endif %}
+
+			</div>
+
+			<div class="clearfix"></div>
+
+			<div class="row">
+				<div class="col-md-12 col-sm-12 ">
+					<div class="alert alert-secondary alert-dismissible " role="alert">
+						<h2 class="title_search">Búsqueda de síntomas</h2>
+						<div class="row">
+							<div class="col-md-8">
+								<div class="form-group">
+									<label>Introduzca el criterio de búsqueda</label>
+									<input type="text" class="form-control" id="searchText" placeholder="Introduzca el criterio de búsqueda">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<a href="#" onclick="onSearchData();return false;" class="btn btn-info btn-lg btn-big btn-block">
+									<i class="fa fa-search"></i>
+									BUSCAR</a>
+							</div>
+
+						</div>
+					</div>
+					<div class="x_panel">
+						<div class="x_title">
+							<h2>Lista de
+								<strong>SÍNTOMAS encontrados</strong>
+								<small>en el sistema Dinámica Miasmática</small>
+							</h2>
+							<ul class="nav navbar-right panel_toolbox">
+								<li>
+									<a class="collapse-link">
+										<i class="fa fa-chevron-up"></i>
+									</a>
+								</li>
+							</ul>
+							<div class="clearfix"></div>
+						</div>
+						<div class="x_content">
+							<div class="row">
+
+								<div class="col-sm-12">
+									<div class="card-box table-responsive">
+										<table id="datatableAjax" class="table table-striped table-bordered" style="width:100%">
+											<thead>
+												<tr>
+													<th>Capítulo</th>
+													<th>Síntoma</th>
+													<th>Rubro</th>
+													<th>Sub-Rubro</th>
+													<th>Modalidad</th>
+													<th>Marca</th>
+													<th>Acción</th>
+												</tr>
+											</thead>
+
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="x_panel">
+								<div class="x_title">
+									<h2>Lista de
+										<strong>SÍNTOMAS seleccionados</strong>
+									</h2>
+									<ul class="nav navbar-right panel_toolbox">
+										<li>
+											<a class="collapse-link">
+												<i class="fa fa-chevron-up"></i>
+											</a>
+										</li>
+									</ul>
+									<div class="clearfix"></div>
+								</div>
+								<div class="x_content">
+									<div class="row">
+										<div class="col-sm-12">
+											<table class="table table-bordered" id="tablaSelected">
+												<thead>
+													<tr>
+														<th>Capítulo</th>
+														<th>Síntoma</th>
+														<th>Rubro</th>
+														<th>Sub-Rubro</th>
+														<th>Modalidad</th>
+														<th>Marcas</th>
+														<th>Acción</th>
+													</tr>
+												</thead>
+												{# <tbody>
+													<tr>
+														<th scope="row">Decepción</th>
+														<td>PSORA
+															<br>
+															<P*>
+																<X*></td>
+																<td>MENTE</td>
+															
+															</tr>
+														</td>
+													</tr>
+													<tr>
+														<th scope="row">Miedo de los perros</th>
+														<td>PSEUDO PSORA
+															<br>
+																<P></p>
+															</td>
+															<td>MENTE</td>
+															
+														</tr>
+													</tbody> #}
+												</table>
+												<a href="#" onclick="dibujarChart(); return false;" class="btn btn-info btn-lg btn-big btn-block">
+																	<i class="fa fa-search"></i>
+																	GENERAR</a>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="x_panel">
+									<div class="x_title">
+										<h2>Gráficos</h2>
+										<ul class="nav navbar-right panel_toolbox">
+											<li>
+												<a class="collapse-link">
+													<i class="fa fa-chevron-up"></i>
+												</a>
+											</li>
+										</ul>
+										<div class="clearfix"></div>
+									</div>
+									<div class="x_content">
+										<figure class="highcharts-figure" style="max-width:900px; height: 600px;">
+											<div id="container"></div>
+										</figure>
+									</div>
+									<div class="x_content">
+										<button id="export-pdf" onclick="generatePDF(); return false;"  class="btn btn-info btn-lg btn-big btn-block"> <i class="fa fa-download"></i> DESCARGAR REPORTE (PDF)</button>
+									</div>
+								</div>
+
+
+							</div>
+
+						</div>
+					</div>
+					<!-- /page content -->
+
+					<!-- footer content -->
+					{#
+					<footer>
+						<div class="pull-right">
+							©2023 Todos los derechos reservados. Sistema Dinámica Miasmática.
+						</div>
+						<div class="clearfix"></div>
+					</footer>
+					#}
+					<!-- /footer content -->
+				</div>
+			{% endblock %}
+			{% block javascripts_code %}
+
+ <script src="https://code.highcharts.com/modules/offline-exporting.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+				<script>
+				const aj = "{{ path('ajaxdatatable') }}";
+				const nombreCompleto = '{{app.user.username}} {{app.user.apellidoPaterno}} {{app.user.apellidoMaterno}}';
+				const registrarReporte = "{{ path('registrarReportes') }}";
+				const reporteTemplate = "{{ path('reporteTemplate') }}";
+				$("#export-pdf").hide();
+				let filter_data = {}
+				let data = {}
+				let rowsSelected = []
+				const onSearchData = () => {
+					const searchText = $("#searchText").val();
+					filter_data.searchText=searchText;
+					table.ajax.reload();
+					table.draw();
+				}
+
+				$('#tablaSelected').on('click', '.remove-from-html', function () {
+					let row = $(this).closest('tr');
+					let rowId = row.attr('id');
+					const rowSelectedDeleted = rowsSelected.find(row=>row.some(item=>item===+rowId))
+					rowsSelected = rowsSelected.filter(row=>row[7]!==+rowId)
+					let tableData = table.data()
+					tableData.unshift(rowSelectedDeleted)
+					table.clear();
+					table.rows.add(tableData).draw();
+					row.remove();
+				});
+
+				const agregarTabla=(id)=>{
+					const rowSelected= data.find(row=>row.some(item=>item===+id))
+					rowsSelected.push(rowSelected)
+					const marcasSelected = rowSelected[8] ? rowSelected[8].split(";").map(eachRow=>eachRow.split("|")[0]):""
+					const html=`<tr id="${rowSelected[7]}">
+						<th scope="row">${rowSelected[0]||""}</th>
+						<td>${rowSelected[1]||""}</td>
+						<td>${rowSelected[2]||""}</td>
+						<td>${rowSelected[3]||""}</td>
+						<td>${rowSelected[4]||""}</td>
+						<td>${rowSelected[5]||""}</td>
+						<td><button class="btn btn-danger btn-xs delete remove-from-html"> <i class="fa fa-trash-o"></i> Eliminar </button></tr>`;
+					$("#tablaSelected").append(html)
+					const ids= rowsSelected.map(row=>row[7])
+					const filteredData =table.data().filter((item,index)=>!ids.includes(item[7]))
+					table.clear();
+        			table.rows.add(filteredData).draw();
+				}
+
+				function uniqueArray(arr, propertyName) {
+					return arr.filter((obj, index, self) => self.findIndex((t) => t[propertyName] === obj[propertyName]) === index);
+				}
+				function countObjects(arr, propertyName) {
+					return arr.reduce((acc, obj) => {
+						const index = acc.findIndex((t) => t[propertyName] === obj[propertyName]);
+						if (index === -1) {
+						acc.push({ ...obj, count: 1 });
+						} else {
+						acc[index].count++;
+						}
+						return acc;
+					}, []);
+				}
+				const dibujarChart = () =>{
+					
+					$.post({
+        			    url:registrarReporte,
+        			    data:{},
+        			    success:(data,status)=>{
+							$("#nroReportesData").html(data?.count||0)
+							if(!!rowsSelected.length){
+								$("#export-pdf").show();
+							}
+							const serie=[{
+									enableMouseTracking: false,
+									animation: {
+										duration: 2000
+									},
+									colorByPoint: true,
+									data: []
+								}]
+								const sintomasNombreArray = rowsSelected.filter(row=>!!row[8]).map(row=> (row[8]||"").split(";").map(rowSplited=>{
+									const itemSplited = rowSplited.split("@")
+									const color = itemSplited[1].split("|")[1]
+									return {nombre:(itemSplited[0]||"").trim(),color:color.trim()}
+								}))
+								const uniqueValues = sintomasNombreArray.map(arrayItem=>uniqueArray(arrayItem, "nombre"));
+								const countValues = countObjects(uniqueValues.flat(), "nombre");
+								const totalValues = countValues.reduce(
+										(previousValue, currentValue) => previousValue + Number(currentValue.count),
+										0
+									)
+
+								const sintomasNombre=countValues.map(countValue=>countValue.nombre).join(", "); 
+								const y = Math.round(100/totalValues)
+								countValues.forEach(row=>{
+									let color="#d82329"
+									if(row.color==="ROJO"){
+										color="#d82329"
+									}
+									if(row.color==="AZUL"){
+										color="#276ba8"
+									}
+									if(row.color==="VERDE"){
+										color="#039949"
+									}
+									if(row.color==="NEGRO"){
+										color="#1b1919"
+									}
+
+									const obj={
+										name:row.nombre,
+										color:color,
+										y:row.count*y
+									}
+									serie[0].data.push(obj)
+
+								})
+
+								chart.update({
+									subtitle:{text:`Resultados personalizados para:<strong>${sintomasNombre}</strong>`},
+									series:serie
+								})
+								chart.redraw()
+        			    },
+        			    error:(jqXHR,status)=>{
+        			        console.log("-->>",jqXHR);
+        			    }
+        			});
+
+					
+				}
+
+				function generatePDF() {
+					
+	$.get(reporteTemplate, function (template) {
+
+		const date = new Date();
+
+		// Opciones de formateo
+		const options = { year: 'numeric', month: 'long', day: 'numeric' };
+
+		// Crear un formateador para español (ES)
+		const dateFormatter = new Intl.DateTimeFormat('es-ES', options);
+
+		// Formatear la fecha
+		const formattedDate = dateFormatter.format(date);
+		const templateElement = $(template);
+		const svg = chart.getSVG();
+		//templateElement.find('#containerImage').html(svg);
+		templateElement.find('#report-date').text(formattedDate);
+		templateElement.find('#doctor-name').html(`<b>Dr.</b> ${nombreCompleto}`);
+		const tableData = rowsSelected.map(row=>[row[0]??"",row[1]??"",row[2]??"",row[3]??"",row[4]??"",row[5]??""]);
+		console.log("tableData-->",tableData)
+		let tableBody = templateElement.find('#table-body');
+		let tableBody2 = $('<table id="tabla2"><tbody></tbody>	</table>');
+		const tableLength = tableData.length
+		for (let indexLength=0 ; indexLength<tableLength;indexLength++) {
+			let tr = $('<tr></tr>');
+			let row = tableData[indexLength]
+				row.forEach(cell => {
+					tr.append(`<td>${cell}</td>`);
+				});
+				
+			if(indexLength<16){
+				tableBody.append(tr);	
+			}else{
+				tableBody2.find('tbody').append(tr);
+			}
+		}
+		if(tableLength>=16){
+			$('body').append(tableBody2);
+		}
+		/*tableData.forEach(row => {
+			let tr = $('<tr></tr>');
+			row.forEach(cell => {
+				tr.append(`<td>${cell}</td>`);
+			});
+			tableBody.append(tr);
+		});*/
+					$('body').append('<div id="export-container"></div>');
+					$('body').append('<div id="export-svg"></div>');
+					$('#export-container').append(templateElement);
+					$('#export-svg').html(svg);
+					const element = document.getElementById('export-container');
+					const elementSvg = document.getElementById('export-svg');
+					const elementTabla2 = document.getElementById('tabla2');
+					console.log("element---->>",element)
+					console.log("elementTabla2---->>",elementTabla2)
+					let now = new Date();
+					let tiempoUnix = now.getTime();
+					let numeroGenerado = tiempoUnix % 1000000; // Obtiene los últimos 6 dígitos del tiempo Unix
+					let firstHeightPage = 0;
+					let secondHeightPage = 0;
+					if (element) {
+						const opt = {
+							margin: 20, // Margen alrededor del contenido en pulgadas
+							filename: `reporte-dinamica-miasmatica-${numeroGenerado}.pdf`, // Nombre del archivo PDF
+							image: { type: 'jpeg', quality: 4 }, // Tipo y calidad de la imagen
+							html2canvas: { scale: 1 }, // Escala para `html2canvas` (aumenta la resolución de la captura)
+							jsPDF: { unit: 'pt', format: 'letter', orientation: 'portrait' } // Configuración de `jsPDF`
+						};
+							const { jsPDF } = window.jspdf;
+							const pdf = new jsPDF(opt.jsPDF);	
+
+						html2canvas(element,{scale: opt.html2canvas.scale,useCORS:true}).then(canvas => {
+							const imgData = canvas.toDataURL('image/jpeg', opt.image.quality);
+							const pageWidth = pdf.internal.pageSize.getWidth();
+                    		const pageHeight = pdf.internal.pageSize.getHeight();
+                    		const imgWidth = pageWidth - 2 * 20;
+                    		const imgHeight = canvas.height * imgWidth / canvas.width;
+							console.log("pageHeight--->",pageHeight)
+							console.log("imgHeight--->",imgHeight)
+							firstHeightPage = imgHeight
+							pdf.addImage(imgData, 'JPEG', opt.margin, opt.margin, imgWidth, imgHeight);
+
+							if((imgHeight+179)>pageHeight){
+								pdf.addPage()
+							}
+
+							//pdf.save(opt.filename);
+							 // Limpiar el contenedor temporal
+							//$('#export-container').remove();
+							//$('#export-svg').remove();
+
+							if(tableLength>=16){
+								html2canvas(elementTabla2,{scale: opt.html2canvas.scale,useCORS:true}).then(canvas => {
+									const imgData = canvas.toDataURL('image/jpeg', opt.image.quality);
+									const pageWidth = pdf.internal.pageSize.getWidth();
+									const pageHeight = pdf.internal.pageSize.getHeight();
+									const imgWidth = pageWidth - 2 * 20;
+									const imgHeight = canvas.height * imgWidth / canvas.width;
+									secondHeightPage = imgHeight
+									const length = pdf.internal.getNumberOfPages()
+									const yMargin = length ===2 ? opt.margin:firstHeightPage +opt.margin
+									pdf.addImage(imgData, 'JPEG', opt.margin, yMargin, imgWidth, imgHeight);
+									html2canvas(elementSvg,{scale: opt.html2canvas.scale,useCORS:true}).then(canvas => {
+										const imgData = canvas.toDataURL('image/jpeg', opt.image.quality);
+										const pageWidth = pdf.internal.pageSize.getWidth();
+										const pageHeight = pdf.internal.pageSize.getHeight();
+										const imgWidth = pageWidth - 2 * 20;
+										const imgHeight = canvas.height * imgWidth / canvas.width;
+										const length = pdf.internal.getNumberOfPages()
+										const yMargin = secondHeightPage +  opt.margin
+										pdf.addImage(imgData, 'JPEG', opt.margin+180, yMargin, imgWidth, imgHeight);
+
+										pdf.save(opt.filename);
+										// Limpiar el contenedor temporal
+										//$('#export-container').remove();
+										//$('#export-svg').remove();
+
+									}).catch(error => {
+										console.error('Error generando el canvas con html2canvas:', error);
+										$('#export-container').remove();
+										$('#export-svg').remove();
+									});
+									//pdf.save(opt.filename);
+									$('#export-container').remove();
+									$('#export-svg').remove();
+									$('#tabla2').remove();
+
+								}).catch(error => {
+									console.error('Error generando el canvas con html2canvas:', error);
+									$('#export-container').remove();
+									$('#tabla2').remove();
+								});
+							}else{
+								html2canvas(elementSvg,{scale: opt.html2canvas.scale,useCORS:true}).then(canvas => {
+									const imgData = canvas.toDataURL('image/jpeg', opt.image.quality);
+									const pageWidth = pdf.internal.pageSize.getWidth();
+									const pageHeight = pdf.internal.pageSize.getHeight();
+									const imgWidth = pageWidth - 2 * 20;
+									const imgHeight = canvas.height * imgWidth / canvas.width;
+									const length = pdf.internal.getNumberOfPages()
+									const yMargin = length ===2 ?  opt.margin:firstHeightPage +opt.margin
+									pdf.addImage(imgData, 'JPEG', opt.margin+180, yMargin, imgWidth, imgHeight);
+
+									pdf.save(opt.filename);
+									// Limpiar el contenedor temporal
+									$('#export-container').remove();
+									$('#export-svg').remove();
+									$('#tabla2').remove();
+
+								}).catch(error => {
+									console.error('Error generando el canvas con html2canvas:', error);
+									$('#export-container').remove();
+									$('#export-svg').remove();
+									$('#tabla2').remove();
+								});
+							}
+
+
+						}).catch(error => {
+							console.error('Error generando el canvas con html2canvas:', error);
+							$('#export-container').remove();
+							$('#export-svg').remove();
+
+
+						});
+
+						
+						
+					} else {
+						console.error('El contenedor de exportación no se encontró.');
+					}
+					
+				}).fail(function() {
+					console.error('Error cargando el template.');
+				});
+		}
+	const table= $("#datatableAjax").DataTable({
+			"language": {
+			"lengthMenu": "Mostrar _MENU_ registros por página",
+			"zeroRecords": "No se encontraron resultados de búsqueda",
+			"info": "_MAX_ registros en total. Página _PAGE_ de _PAGES_",
+			"infoEmpty": "No records available",
+			"paginate": {
+			"first": "Primero",
+			"last": "Último",
+			"next": "Siguiente",
+			"previous": "Anterior"
+			},
+			"search": "Buscar:"
+			},
+			"bDestroy": true,
+			"processing": true,
+			"ajax": {
+				url:aj,
+				type:"POST",
+						pages:5,
+						data: function (d) {
+						$.extend(d, filter_data);
+						console.log("d--->>>",d);
+						return d;
+						}
+					},
+					"fnInitComplete": function(oSettings, json) {
+						data=json.data
+					}
+					});
+
+    (function (H) {
+      var highchartsOptions = Highcharts.setOptions({
+      lang: {
+            loading: 'Cargando...',
+            exportButtonTitle: "Exportar",
+            printButtonTitle: "Imprimir",
+            rangeSelectorFrom: "De",
+            rangeSelectorTo: "Até",
+            rangeSelectorZoom: "Periodo",
+            downloadPNG: 'Descargar imagem PNG',
+            downloadJPEG: 'Descargar imagem JPEG',
+            downloadPDF: 'Descargar documento PDF',
+            downloadSVG: 'Descargar imagem SVG',
+            downloadCSV: 'Descargar en formato CSV',
+            downloadXLS: 'Descargar en formato XLS',
+            exitFullscreen: 'Salir de pantalla completa',
+            printChart: 'Imprimir',
+            viewData: 'Ver tabla de datos',
+            hideData: 'Ocultar tabla de datos'
+            }
+          }
+      );
+  
+      
+    H.seriesTypes.pie.prototype.animate = function (init) {
+        const series = this,
+            chart = series.chart,
+            points = series.points,
+            {
+                animation
+            } = series.options,
+            {
+                startAngleRad
+            } = series;
+
+        function fanAnimate(point, startAngleRad) {
+            const graphic = point.graphic,
+                args = point.shapeArgs;
+
+            if (graphic && args) {
+
+                graphic
+                    // Set inital animation values
+                    .attr({
+                        start: startAngleRad,
+                        end: startAngleRad,
+                        opacity: 1
+                    })
+                    // Animate to the final position
+                    .animate({
+                        start: args.start,
+                        end: args.end
+                    }, {
+                        duration: animation.duration / points.length
+                    }, function () {
+                        // On complete, start animating the next point
+                        if (points[point.index + 1]) {
+                            fanAnimate(points[point.index + 1], args.end);
+                        }
+                        // On the last point, fade in the data labels, then
+                        // apply the inner size
+                        if (point.index === series.points.length - 1) {
+                            series.dataLabelsGroup.animate({
+                                opacity: 1
+                            },
+                            void 0,
+                            function () {
+                                points.forEach(point => {
+                                    point.opacity = 1;
+                                });
+                                series.update({
+                                    enableMouseTracking: true
+                                }, false);
+                                chart.update({
+                                    plotOptions: {
+                                        pie: {
+                                            innerSize: '40%',
+                                            borderRadius: 8
+                                        }
+                                    }
+                                });
+                            });
+                        }
+                    });
+            }
+        }
+
+        if (init) {
+            // Hide points on init
+            points.forEach(point => {
+                point.opacity = 0;
+            });
+        } else {
+            fanAnimate(points[0], startAngleRad);
+        }
+    };
+}(Highcharts));
+
+const chart = Highcharts.chart('container', {
+    chart: {
+        type: 'pie'
+    },
+	exporting: {
+      enabled: false
+    },
+    title: {
+        text: 'Dinámica Miasmática',
+        align: 'left'
+    },
+    subtitle: {
+        text: 'Resultados personalizados para: <strong>Decepción, Miedo de los perros</strong>	',
+        align: 'left'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    accessibility: {
+        point: {
+            valueSuffix: '%'
+        }
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            borderWidth: 2,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b><br>{point.percentage:.1f}%',
+                distance: 20
+            }
+        }
+    },
+    series: [{
+        // Disable mouse tracking on load, enable after custom animation
+        enableMouseTracking: false,
+        animation: {
+            duration: 2000
+        },
+        colorByPoint: true,
+        data: [{
+            name: '',
+            color: '#d82329',
+            y: 0
+          }]
+    }]
+});
+chart.setSize(900,600);
+
+				</script>
+			{% endblock %}

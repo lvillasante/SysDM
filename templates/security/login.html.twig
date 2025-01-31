@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	DM | Ingreso
+{% endblock %}
+
+{% block class_body %}login
+{% endblock %}
+
+{% block header_evento_login %}
+	<a class="hiddenanchor" id="signup"></a>
+	<a class="hiddenanchor" id="signin"></a>
+{% endblock %}
+
+{% block class_main_div %}login_wrapper
+{% endblock %}
+
+{% block body %}
+
+	<div class="animate form login_form">
+		<section class="login_content">
+			<div class="img-login">
+				<img src="{{asset('img/logo_dinamica.png')}}" alt="Dinamica Miasmatica">
+			</div>
+			<form action="{{ path('app_login') }}" method="post">
+				{% if error %}
+					<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+				{% endif %}
+				<h1>Ingreso</h1>
+				<div class="img-login">
+					<input type="text" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Nombre de usuario" required/>
+				</div>
+				<div>
+					<input type="password" name="password" id="inputPassword" class="form-control" placeholder="Contraseña" required/>
+				</div>
+				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+				<div>
+					<button type="submit" class="btn btn-success submit">Ingresar</button>
+				</div>
+
+				<div class="clearfix"></div>
+
+				<div class="separator">
+
+					<div class="clearfix"></div>
+					<br/>
+
+					<div>
+						<h1>
+							<i class="fa fa-child"></i>
+							Dinámica Miasmática</h1>
+						<p>
+							©<span id="copyright"></span>
+							Todos los derechos reservados. Sistema Dinámica Miasmática.</p>
+					</div>
+				</div>
+			</form>
+		</section>
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	{{parent()}}
+	<script>
+	 document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))
+	</script>
+{% endblock %}
+

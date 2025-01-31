@@ -1,0 +1,33 @@
+admin_routes:
+    resource: ../src/Controller/
+    type: annotation
+    prefix: /admin/
+user_login:
+    resource: ../src/Controller/{SecurityController}.php
+    type: annotation
+    prefix: /
+reset_password:
+    resource: ../src/Controller/{ResetPasswordController}.php
+    type: annotation
+    prefix: /
+_errors:
+    resource: '@FrameworkBundle/Resources/config/routing/errors.xml'
+    prefix:   /_error
+eventos_list:
+    path: /eventos
+    controller: App\Controller\EventoController::listado
+eventos_detalle:
+    path: /eventos/{id}
+    controller: App\Controller\EventoController::detalle
+eventos_inscripcion:
+    path: /eventos/inscripcion/{id_evento}
+    controller: App\Controller\EmpresaController::inscripcion
+eventos_checkmail:
+    path: /eventos_checkmail
+    controller: App\Controller\EmpresaController::verificar
+eventos_salir:
+    path: /salir
+    controller: App\Controller\DefaultController::salir
+eventos_codigo:
+    path: /eventos_codigo
+    controller: App\Controller\DefaultController::verifyCode

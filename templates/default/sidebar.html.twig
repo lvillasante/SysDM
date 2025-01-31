@@ -1,0 +1,131 @@
+<div
+	class="col-md-3 left_col">
+
+	<!-- Sidebar -->
+	<div class="left_col scroll-view">
+		<div class="navbar nav_title" style="border: 0">
+			<a href="/" class="site_title">
+				<img src="{{asset('img/logo.png')}}" alt="" class="logo_main"/>
+				<span>Dinámica Miasmática
+				</span>
+			</a>
+		</div>
+
+		<div class="clearfix"></div>
+		<div class="profile clearfix">
+			<div class="profile_pic">
+				<img src="{{asset('img/user.png')}}" alt="..." class="img-circle profile_img"/>
+			</div>
+			<div class="profile_info">
+				<span>Bienvenido(a),</span>
+				<h2>{{app.user.username}}</h2>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+
+		<br/>
+		<!-- Sidebar Menu -->
+		<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+			<div class="menu_section">
+				<h3>Menú</h3>
+				<ul class="nav side-menu">
+
+					{% if is_granted('ROLE_ADMIN') %}
+						<li class="{% if name_route == "homepage"%}active{% endif %}">
+							<a href="{{path('homepage')}}">
+								<i class="fa fa-laptop"></i>
+								Inicio
+							</a>
+						</li>
+					{% endif %}
+					{% if is_granted('ROLE_ADMIN') %}
+						<li class="{% if name_route == "usuario_index" or name_route=="usuario_new" or name_route=="usuario_edit"%}active {% endif %}">
+							<a>
+								<i class="fa fa-users"></i>
+								Usuarios
+								<span class="fa fa-chevron-down"></span>
+							</a>
+							<ul class="nav child_menu">
+								<li>
+									<a href="{{path('usuario_index')}}">
+										Lista de usuarios
+									</a>
+								</li>
+								<li>
+									<a href="{{path('usuario_new')}}">
+										Nuevo Usuario
+									</a>
+								</li>
+							</ul>
+						</li>
+						<li class="{% if name_route == "marca_index" or name_route=="marca_new" or name_route=="marca_edit"%}active {% endif %}">
+							<a>
+								<i class="fa fa-gears"></i>
+								Marcas
+								<span class="fa fa-chevron-down"></span>
+							</a>
+							<ul class="nav child_menu">
+								<li>
+									<a href="{{path('marca_index')}}">Lista de marcas</a>
+								</li>
+								<li>
+									<a href="{{path('marca_new')}}">Nueva Marca</a>
+								</li>
+							</ul>
+						</li>
+						<li class="{% if name_route == "sintoma_index" or name_route=="sintoma_new" or name_route=="sintoma_edit"%}active {% endif %}">
+							<a>
+								<i class="fa fa-table"></i>
+								Síntomas
+								<span class="fa fa-chevron-down"></span>
+							</a>
+							<ul class="nav child_menu">
+								<li>
+									<a href="{{path('sintoma_index')}}">Lista de síntomas</a>
+								</li>
+								<li>
+									<a href="{{path('sintoma_new')}}">Nuevo síntoma</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a>
+								<i class="fa fa-clone"></i>Reportes
+								<span class="fa fa-chevron-down"></span>
+							</a>
+							<ul class="nav child_menu">
+								<li>
+									<a href="{{path('reportes')}}">Generar reportes</a>
+								</li>
+							</ul>
+						</li>
+					{% endif %}
+					{% if is_granted('ROLE_ESTUDIANTE') or is_granted('ROLE_MEDICO') %}
+					<li>
+							<a>
+								<i class="fa fa-clone"></i>Reportes
+								<span class="fa fa-chevron-down"></span>
+							</a>
+							<ul class="nav child_menu">
+								<li>
+									<a href="{{path('reportes')}}">Generar reportes</a>
+								</li>
+							</ul>
+						</li>
+					{% endif %}
+
+				</ul>
+
+				 <!-- Foto DM -->
+                <div class="position-photo-dm">
+                  <div class="photo-dm text-white" id="sidebar_bottom_wizard">
+                    <img src="{{asset('/img/photo-dm.jpg')}}" alt="Fotografia de GIAMPIETRO" class="mx-auto relative">
+                  </div>
+                </div>
+                <!-- END Foto DM -->
+			</div>
+		</div>
+		<!-- /.sidebar-menu -->
+	</div>
+	<!-- /.sidebar -->
+</div>

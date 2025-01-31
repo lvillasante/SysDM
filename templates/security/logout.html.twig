@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}| Log in!
+{% endblock %}
+
+{% block class_body %}hold-transition login-page
+{% endblock %}
+{% block style_evento_login %}
+	
+
+{% endblock %}
+{% block header_evento_login %}
+
+{% endblock %}
+
+{% block class_main_div %}login-box
+{% endblock %}
+
+{% block body %}
+	
+	<div class="login-logo">
+
+	</div>
+	<div class="card">
+		<div class="card-body login-card-body">
+      <p style="text-align:center"><img src="{{asset('img/recovery.png')}}" width="100" ></p>
+      <p class="login-box-msg">Gracias por utilizar nuestro sistema,<br>
+      para volver a ingresar puede hacerlo con el enlace proporcionado en su mail o por nuestro portal de eventos.
+      </p>      
+
+      <p class="mb-1" style="text-align:center">
+      {% if empresaGlobal=='fundempresa'%}
+				  <a href="https://relacionescomerciales.fundempresa.org.bo/"><button type="button" class="btn btn-block btn-success">Visitar el portal</button></a>
+				{% else %}
+				<a href="https://negociosvirtual.com//"><button type="button" class="btn btn-block btn-success">Visitar el portal</button></a>
+				{% endif %}
+      </p>
+      
+    </div>
+		<!-- /.login-card-body -->
+	</div>
+{% endblock %}

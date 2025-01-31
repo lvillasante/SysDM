@@ -1,0 +1,46 @@
+{% extends 'layout.html.twig' %}
+{% block title_page %}Editar Usuario{% endblock %}
+{% block contenido %}
+	<!-- page content -->
+	<div class="right_col" role="main">
+		<div class="">
+			<div class="page-title">
+				<div class="title_left">
+					<h3></h3>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+
+			<div class="row">
+				<div class="col-md-12 col-sm-12  ">
+					{% for msg in app.session.flashbag.get('notice') %}
+						<div class="alert alert-{{ msg.type }} alert-dismissible " role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">×</span>
+							</button>
+							<h2>{{ msg.title }}</h2>
+							{{ msg.message }}<br/>
+							Por favor intente de nuevo revisando que todos los campos esten llenados de forma correcta.
+						</div>
+					{% endfor %}
+
+
+					<div class="x_panel">
+						<div class="x_title">
+							<h2>Editar una marca</h2>
+							<ul class="nav navbar-right panel_toolbox">
+								<li>
+									<a class="collapse-link">
+										<i class="fa fa-chevron-up"></i>
+									</a>
+								</li>
+							</ul>
+							<div class="clearfix"></div>
+						</div>
+						 {{ include('sintoma/_form_edit.html.twig', {'button_label': 'Actualizar'}) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

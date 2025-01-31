@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<section class="content">
+      <div class="error-page">
+        <h2 class="headline text-danger">Oops!</h2>
+
+        <div class="error-content">
+          <h3><i class="fas fa-exclamation-triangle text-danger"></i> Evento no encontrado.</h3>
+
+          <p>
+            No se encontro el evento solicitado.<br>
+
+            Puede regresar <a href="{{path('eventos_list')}}">al listado</a>.
+          </p>
+
+        </div>
+      </div>
+      <!-- /.error-page -->
+
+    </section>
+{% endblock %}

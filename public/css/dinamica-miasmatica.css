@@ -1,0 +1,207 @@
+/* CSS Custom Dinamica Miasmatica */
+/*------------------------------------*\
+    Proyect     : Dinamica Misamatica
+    Designer    : Luis Villasante
+    E - mail    : luis.villasante[at]gmail.com
+    Filename    : dinamica-miasmatica.css
+    Version     : 1.2
+    Date        : Nov 18, 2023 - 00078
+\*------------------------------------*/
+
+body.login{
+	/*background-image: url(../images/bg-dinamica.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;*/
+	/* background: url(../images/bg-dinamica.jpg) no-repeat center center fixed;  */
+	background: url(../img/bg-dinamica-2024.jpeg) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	color: #252c34;
+}
+
+.img-login img{
+	max-width: 100%;
+	width: auto;
+	height: 210px;
+	max-height: 12vh;
+	border-top-right-radius: 20px ;
+	border-top-left-radius: 20px;
+}
+
+.login_content{
+	/* text-shadow: 0 0 3px #fff; */
+	text-shadow: 1px 1px 3px #000;
+	color: #ebebeb;
+}
+
+.login_form{
+/*	background-color: red;*/
+	backdrop-filter: blur(15px);
+	padding: 0 10px;
+	border: 2px solid rgba(255, 255, 255, .6);
+	border-radius: 20px;
+}
+.login_content form div a{
+	text-shadow: none;
+}
+.login_content form div a:hover{
+	text-decoration: none;
+}
+.site_title{
+	font-size: 19px;
+	padding-left: 5px;
+}
+.logo_main{
+	/* max-width: 100%; */
+	max-height: 30px;
+}
+.panel_toolbox{
+	min-width: auto;
+}
+.btn-xs{
+	padding: .1rem .5rem;
+	font-size: .9rem;
+	margin-bottom: 2px;
+    margin-right: 2px;
+}
+.title_search{
+	border-bottom: 2px solid #b4b4b4;
+}
+.btn-big{
+	padding: 1.1rem 4rem;
+}
+
+/* Custom color */
+body{
+	/* background: #508d6e;   */
+	background: #1f7c5f;  
+}
+.nav.side-menu>li.current-page, .nav.side-menu>li.active{
+	/* border-right: 5px solid #542099; */
+	border-right: 5px solid #6f30c3;
+}
+.btn-info,
+.btn-success{
+	background-color: #542099;
+    border-color: #381465;
+}
+.nav.side-menu>li.active>a{
+	background: -webkit-gradient(linear, left top, left bottom, from(#334556), to(#2C4257)),#2A3F54;
+    background: linear-gradient(#542099, #542099),#542099;
+}
+.left_col{
+	/* background: #508d6e; */
+	background: #1f7c5f;
+}
+.alert-dismissible{
+	padding-right: 1.25rem;
+}
+
+/* highcharts PIE */
+.highcharts-figure,
+.highcharts-data-table table {
+    min-width: 320px;
+    max-width: 800px;
+    margin: 1em auto;
+}
+
+.highcharts-data-table table {
+    font-family: Verdana, sans-serif;
+    border-collapse: collapse;
+    border: 1px solid #ebebeb;
+    margin: 10px auto;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.highcharts-data-table caption {
+    padding: 1em 0;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.highcharts-data-table th {
+    font-weight: 600;
+    padding: 0.5em;
+}
+
+.highcharts-data-table td,
+.highcharts-data-table th,
+.highcharts-data-table caption {
+    padding: 0.5em;
+}
+
+.highcharts-data-table thead tr,
+.highcharts-data-table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+.highcharts-data-table tr:hover {
+    background: #f1f7ff;
+}
+
+/* Colores Dinamica Miasmatica*/
+/* ROJO #d82329 */
+.bg-rojo{
+	background-color: #d82329!important;
+}
+
+/* AZUL #276ba8*/
+.bg-azul{
+	background-color: #276ba8!important;
+}
+
+/* VERDE #039949 */
+.bg-verde{
+	background-color: #039949!important;
+}
+
+/* NEGRO #1b1919 */
+.bg-negro{
+	background-color: #1b1919!important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #e4e4e4;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: inline-block;
+    margin-left: 5px;
+    margin-top: 5px;
+    padding: 0;
+    padding-left: 20px;
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: bottom;
+    white-space: nowrap;
+}
+
+/* CSS para fotografia */
+.nav-sm .position-photo-dm{
+	display: none;
+}
+.position-photo-dm{
+	position: absolute;
+	bottom: 0;
+}
+.photo-dm{
+	text-align: center;
+	padding: 1rem;
+	position: relative;
+}
+.photo-dm img{
+	max-width: 100%;
+	background: #fff;
+    margin-left: 15%;
+    position: inherit;
+    border: 1px solid rgba(52,73,94,0.44);
+	border-radius: 1rem;
+    padding: 4px;
+}

@@ -1,0 +1,23 @@
+{% extends 'layout.html.twig' %}
+    {% block title_page %}Error 500{% endblock %} 
+
+{% block contenido %}
+<section class="content">
+      <div class="error-page">
+        <h2 class="headline text-danger">500</h2>
+
+        <div class="error-content">
+          <h3><i class="fas fa-exclamation-triangle text-danger"></i> Oops! algo falló.</h3>
+
+          <p>
+            Revisaremos la causa del error.<br>
+
+            Puede regresar <a href="{{path('homepage')}}">al dashboard</a>.
+          </p>
+
+        </div>
+      </div>
+      <!-- /.error-page -->
+
+    </section>
+{% endblock %}
